@@ -31,7 +31,7 @@ function StudentTable() {
             </CustomButton>
           </Grid>
         </Flex>
-        <SearchBar placeholder="Search for gl" />
+        <SearchBar placeholder="Search for student" />
         <CardBody>
           <Table variant="simple" size="sm">
             <Thead>
