@@ -108,7 +108,7 @@ function NewRegistration() {
       newStaff(
         { ...form, query_type: type, reg, image },
         (data) => {
-          if (data.success) {
+           if (data.success) {
             history.goBack();
             toast({
               title:

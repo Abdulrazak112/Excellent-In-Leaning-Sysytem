@@ -11,9 +11,13 @@ import {
 } from "@chakra-ui/react";
 import Card from "components/Card/Card";
 import { CustomButton } from "components/shared/CustomButton";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { CustomInput } from "components/shared/CustomInput";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getStudentInfo, postStudentInfo } from "redux/actions/studentCus"
+import profile from "../../../assets/img/profile1.png";
+import "./profileImage.css";
+
 
 function StudentForm() {
   const [form, setForm] = useState({
@@ -34,16 +38,56 @@ function StudentForm() {
     gurdian_sor: "",
     gurdian_lga: "",
     gurdian_address: "",
+    gurdian_phoneNo: "",
     gurdian_nationality: "",
     gurdian_religion: "",
   });
+  const [image, setImage] = useState("")
   const handleChange = ({ target: { name, value } }) => {
     setForm((p) => ({ ...p, [name]: value }));
   };
+
   const history = useHistory();
+  const params = useParams()
+
+
   const handleSubmit = () => {
-    console.log(form);
+    let tost = id > 0 ? "Update successfully" : "Submit successfully"
+    let toste = id > 0 ? "update" : "insert"
+
+    postStudentInfo(
+      { ...form, query_type: toste },
+      (data) => {
+        history.goBack();
+        alert(tost)
+      },
+      (err) => {
+        alert("bad request")
+      }
+    );
   };
+
+  let id = params.id
+  const hadleSelectId = () => {
+    console.log(id)
+    getStudentInfo(
+      { query_type: "selectId", id },
+      (data) => {
+        if (data.length) {
+          setForm(data[0]);
+          //			alert("success")
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  useEffect(() => {
+    hadleSelectId()
+  }, [])
+
   return (
     <div>
       <Flex mt="20">
@@ -64,6 +108,44 @@ function StudentForm() {
               </Button>
             </Grid>
           </Flex>
+
+          {/* <GridItem f="right">
+                <Text fontSize="20">Profile Image</Text> 
+                <div className="profile-pic-wrapper">
+                  <div className="pic-holder">
+                    {/* <img
+                      id="profilePic"
+                      class="pic"
+                      src={profile}
+                    /> }
+
+                    <label for="newProfilePhoto" className="upload-file-block">
+                      opload image
+                    </label>
+                    <CustomInput
+                      className="uploadProfileInput"
+                      type="file"
+                      name="profile_pic"
+                      id="newProfilePhoto"  
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      onChange={(e) =>
+                        setImage(URL.createObjectURL(e.target.files[0]))
+                      }
+                    />
+                    <>
+                      <img
+                        src={image && image}
+                        alt="`"
+                         style={{
+                           width: "auto",
+                           height: "auto",
+                         }}
+                      />
+                    </>
+                  </div>
+                </div>
+              </GridItem> */}
           <SimpleGrid minChildWidth="250px" spacing="40px">
             <GridItem>
               <FormLabel>Student Name</FormLabel>
@@ -153,7 +235,7 @@ function StudentForm() {
           {/* <CustomButton>Submit</CustomButton> */}
         </Card>
       </Flex>
-      <Text fontSize="30px" fontFamily={"fantasy"} mt="2">
+      <Text fontSize="30px" fontFamily={"fantasy"} mt="2" >
         PARENT/GURDIAN PERSONAL DATA
       </Text>
       <Flex mt="4">
@@ -218,14 +300,15 @@ function StudentForm() {
               />
             </GridItem>
             <GridItem>
-              <FormLabel>Residential/Home Address</FormLabel>
+              <FormLabel>Gurdian Phone Number</FormLabel>
               <CustomInput
-                type="text"
-                name="gurdian_address"
-                value={form.gurdian_address}
+                type="number"
+                name="gurdian_phoneNo"
+                value={form.gurdian_phoneNo}
                 onChange={handleChange}
               />
             </GridItem>
+
             <GridItem>
               <FormLabel>Nationality</FormLabel>
               <CustomInput
@@ -245,7 +328,16 @@ function StudentForm() {
               />
             </GridItem>
           </SimpleGrid>
-          <CustomButton onClick={handleSubmit}>Submit</CustomButton>
+          <SimpleGrid minChildWidth="250px" spacing="40px" mt="5">
+            <GridItem>
+              <FormLabel>Residential/Home Address</FormLabel>
+              <Textarea
+                name="gurdian_address"
+                value={form.gurdian_address}
+                onChange={handleChange} />
+            </GridItem>
+          </SimpleGrid>
+          <CustomButton onClick={handleSubmit}> {id > 0 ? "Update" : "Submit"}</CustomButton>
         </Card>
       </Flex>
     </div>

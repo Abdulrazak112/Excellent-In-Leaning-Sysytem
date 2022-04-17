@@ -32,14 +32,14 @@ function SignIn() {
 
   const toast = useToast()
   const [isLoading, setIsLoading] = useState(false)
-  const [form, setForm] = useState({email:'', password:''})
+  const [form, setForm] = useState({ username: '', password: '' })
   const [rememberMe, setRemeberMe] = useState(false)
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((p) => ({ ...p, [name]: value }))
 
   const handleSubmit = () => {
-    let errors = []
+    let errors = [] 
     Object.keys(form).forEach((item) => {
       if (form[item] === '') {
         errors.push(item + ' cannot be empty!')
@@ -69,6 +69,7 @@ function SignIn() {
 
   return (
     <Flex position="relative" mb="40px">
+      {/* {JSON.stringify(form)} */}
       <Flex
         h={{ sm: 'initial', md: '75vh', lg: '85vh' }}
         w="100%"
@@ -86,7 +87,7 @@ function SignIn() {
         >
           <Flex
             direction="column"
-            w="100%"
+            w="100%" 
             background="transparent"
             p="48px"
             mt={{ md: '150px', lg: '80px' }}
@@ -106,11 +107,11 @@ function SignIn() {
             {/* {JSON.stringify(form)} */}
             <FormControl>
               <CustomInput
-                label="Email"
+                label="username"
                 placeholder="Your email adress"
-                name="email"
+                name="username"
                 onChange={handleChange}
-                value={form.email}
+                value={form.username}
               />
 
               <CustomInput

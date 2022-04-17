@@ -26,6 +26,7 @@ export default function Configurator(props) {
   const [switched, setSwitched] = useState(props.isChecked);
 
   const { colorMode, toggleColorMode } = useColorMode();
+  console.log(colorMode)
   // Chakra Color Mode
   let fixedDisplay = "flex";
   if (props.secondary) {
@@ -135,7 +136,7 @@ export default function Configurator(props) {
               </Flex>
 
               <Separator />
-              <Box mt="24px">
+              {/* <Box mt="24px">
                 <Text fontSize="md" fontWeight="600">
                   Sidenav Type
                 </Text>
@@ -221,7 +222,7 @@ export default function Configurator(props) {
                     </Link>
                   </Flex>
                 </Box>
-              </Box>
+              </Box> */}
             </Flex>
           </DrawerBody>
         </DrawerContent>

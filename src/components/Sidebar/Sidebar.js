@@ -215,7 +215,7 @@ function Sidebar(props) {
     <Box pt={"25px"} mb="12px">
       <Link
         href={`${process.env.PUBLIC_URL}/#/`}
-        target="_blank"
+        // target="_blank"
         display="flex"
         lineHeight="100%"
         mb="30px"
@@ -233,7 +233,7 @@ function Sidebar(props) {
     </Box>
   );
 
-  // SIDEBAR
+  //   SIDEBAR
   return (
     <Box ref={mainPanel}>
       <Box display={{ sm: "none", xl: "block" }} position="fixed">
@@ -252,10 +252,9 @@ function Sidebar(props) {
           ps="20px"
           pe="20px"
           m={sidebarMargins}
-          borderRadius={sidebarRadius}
-        >
+          borderRadius={sidebarRadius}>
           <Box>{brand}</Box>
-          <CustomScrollbar height="34em">
+          <CustomScrollbar height="37em">
             <Stack direction="column" mb="40px">
               <Box>{links}</Box>
             </Stack>
@@ -437,7 +436,7 @@ export function SidebarResponsive(props) {
     <Box pt={"35px"} mb="8px">
       <Link
         href={`${process.env.PUBLIC_URL}/#/`}
-        target="_blank"
+        // target="_blank"
         display="flex"
         lineHeight="100%"
         mb="30px"

@@ -1,12 +1,12 @@
 import { apiURL, _fetchApi, _postApi } from "./api";
 
-export const getQuestions = (q = {}, callback = (f) => f, error = (f) => f) => {
+export const getStudentInfo = (q = {}, callback = (f) => f, error = (f) => f) => {
   const query_string = Object.keys(q)
     .map((a) => a + "=" + q[a])
     .join("&");
 
   _fetchApi(
-    `${apiURL}/questions/get?${query_string}`,
+    `${apiURL}/student-info/all?${query_string}`,
     (data) => {
       if (data && data.results) {
         callback(data.results);
@@ -16,13 +16,13 @@ export const getQuestions = (q = {}, callback = (f) => f, error = (f) => f) => {
   );
 };
 
-export const postQuestions = (
+export const postStudentInfo = (
   data = {},
   callback = (f) => f,
   error = (f) => f
 ) => {
   _postApi(
-    `${apiURL}/questions/new`,
+    `${apiURL}/student-info/post`,
     data,
     (data) => {
       if (data.success) {

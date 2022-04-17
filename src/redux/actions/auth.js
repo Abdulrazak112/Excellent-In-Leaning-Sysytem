@@ -23,14 +23,14 @@ export const createUser = (
 };
 
 export const login = (
-  { email = "", password = "" },
+  { username = "", password = "" },
   callback = (f) => f,
   error = (f) => f
 ) => {
   let success = async (results) => {
     const { user, token } = results;
     if (token) {
-      localStorage.setItem("@exam_system:user", JSON.stringify(token));
+      localStorage.setItem("@school_management:user", JSON.stringify(token));
     }
     if (results && results.success) {
       const { token } = results;
@@ -48,7 +48,7 @@ export const login = (
     console.log("err", err);
     error("Unable to login at this time, try again later!");
   };
-  _postApi(`${apiURL}/users/login`, { email, password }, success, error_cb);
+  _postApi(`${apiURL}/users/login`, { username, password }, success, error_cb);
 };
 
 export const staffLogin = (

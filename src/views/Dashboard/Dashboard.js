@@ -88,7 +88,7 @@ export default function Dashboard() {
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize="lg" color={textColor}>
-                    $53,000
+                    ₦ 53,000
                   </StatNumber>
                   <StatHelpText
                     alignSelf="flex-end"
@@ -194,7 +194,7 @@ export default function Dashboard() {
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize="lg" color={textColor} fontWeight="bold">
-                    $173,000
+                    ₦ 173,000
                   </StatNumber>
                   <StatHelpText
                     alignSelf="flex-end"

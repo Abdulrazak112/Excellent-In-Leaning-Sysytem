@@ -18,7 +18,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
 import { Store } from "context/Store";
@@ -29,9 +28,12 @@ ReactDOM.render(
       <Switch>
         <Route path={`/auth`} component={AuthLayout} />
         <Route path={`/admin`} component={AdminLayout} />
-        <Redirect from={`/`} to="/admin/dashboard" />
+
+
+        {/* <Route path={`/rtl`} component={RTLLayout} /> */}
+        <Redirect from={`/`} to="/auth/signin" />
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter>{" "}
   </Store>,
   document.getElementById("root")
 );
